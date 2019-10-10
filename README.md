@@ -1,1 +1,1 @@
-# Library API C# Plural sight course
+# Library API C# Pluralsight course
