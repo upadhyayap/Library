@@ -7,6 +7,8 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Library.API.Helpers;
+using AutoMapper;
+using System.Collections;
 
 namespace Library.API.Controllers
 {
@@ -24,7 +26,7 @@ namespace Library.API.Controllers
         public IActionResult getAuthors()
         {
             var authors = libraryRepository.GetAuthors();
-            var taperedAuthors = new List<AuthorDto>();
+            /*var taperedAuthors = new List<AuthorDto>();
 
             foreach (var author in authors)
             {
@@ -36,8 +38,8 @@ namespace Library.API.Controllers
                     Age = author.DateOfBirth.GetCurrentAge()
                 });  
 
-            }
-
+            }*/
+            var taperedAuthors = Mapper.Map<IEnumerable<AuthorDto>>(authors);
 
             return new JsonResult(taperedAuthors);
         }

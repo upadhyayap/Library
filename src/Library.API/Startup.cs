@@ -58,8 +58,9 @@ namespace Library.API
 
             AutoMapper.Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap(Entities.Author, Entities.AuthorDto)()
-                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => { $"{src.FirstName} {src.LastName}"; }));
+                cfg.CreateMap<Author, Entities.AuthorDto>()
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => $"{src.FirstName} {src.LastName}"))
+                .ForMember(dest => dest.Age, opt => opt.MapFrom(src => src.DateOfBirth.GetCurrentAge()));
             });
 
 
