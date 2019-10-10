@@ -38,7 +38,7 @@ namespace Library.API.Controllers
                     Age = author.DateOfBirth.GetCurrentAge()
                 });  
 
-            }*/
+            }*/ //test
             var taperedAuthors = Mapper.Map<IEnumerable<AuthorDto>>(authors);
 
             return new JsonResult(taperedAuthors);
