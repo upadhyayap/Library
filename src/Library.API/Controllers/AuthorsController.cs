@@ -36,7 +36,7 @@ namespace Library.API.Controllers
                     Name = $"{author.FirstName} {author.LastName}",
                     Genere = author.Genre,
                     Age = author.DateOfBirth.GetCurrentAge()
-                });  
+                });
 
             }*/
             var taperedAuthors = Mapper.Map<IEnumerable<AuthorDto>>(authors);
