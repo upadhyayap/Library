@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Library.API.Helpers;
 using AutoMapper;
 using System.Collections;
+using Microsoft.AspNetCore.Mvc.Formatters;
 
 namespace Library.API.Controllers
 {
@@ -41,7 +42,43 @@ namespace Library.API.Controllers
             }*/
             var taperedAuthors = Mapper.Map<IEnumerable<AuthorDto>>(authors);
 
-            return new JsonResult(taperedAuthors);
+            return Ok(taperedAuthors);
+        }
+
+        [HttpGet("{id}", Name ="getAuthor")]
+        public IActionResult getAuthor(Guid id)
+        {
+            var authorFromRepo = libraryRepository.GetAuthor(id);
+
+            if (authorFromRepo == null)
+            {
+                return NotFound();
+            }
+
+            var author = Mapper.Map<AuthorDto>(authorFromRepo);
+
+            return Ok(author);
+        }
+        [HttpPost]
+        public IActionResult createAuthor([FromBody] AuthorCreationDto author)
+        {
+            if (author == null)
+            {
+                return BadRequest();
+            }
+
+            var authorEntity = Mapper.Map<Author>(author);
+
+            libraryRepository.AddAuthor(authorEntity);
+
+            if (!libraryRepository.Save())
+            {
+                return StatusCode(500, "Error in creating Author");
+            }
+
+            var authorDto = Mapper.Map<AuthorDto>(authorEntity);
+
+            return CreatedAtRoute("getAuthor", new { id = authorDto.Id}, authorDto);
         }
     }
 }
