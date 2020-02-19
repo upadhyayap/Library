@@ -1,2 +1,2 @@
-[![Build Status](http://anand-fe/DefaultCollection/localAzDev/_apis/build/status/Library?branchName=master)](http://anand-fe/DefaultCollection/localAzDev/_build/latest?definitionId=2&branchName=master)
+![Library build](https://github.com/upadhyayap/Library/workflows/Library%20build/badge.svg)
 # Library API C# Pluralsight course
